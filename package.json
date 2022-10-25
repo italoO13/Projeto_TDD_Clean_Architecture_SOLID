@@ -8,7 +8,7 @@
     "test:watch": "npm run test -- --watch",
     "test:staged": "npm run test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage"
-
+    
   },
   "keywords": [],
   "author": "",
