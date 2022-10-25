@@ -1,3 +1,7 @@
+export type ParamnsRequestPost = {
+  url: string
+}
+
 export interface HttpPostClient {
-  post(url: string): Promise<void>
+  post(paramns: ParamnsRequestPost): Promise<void>
 }
