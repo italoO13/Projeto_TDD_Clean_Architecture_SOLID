@@ -3,13 +3,14 @@ import { HttpResponse, HttpStatusCode } from '../protocols/http/http-response'
 import { AuthenticationParamns } from '@/domain/usecases/authentication'
 import { InvalidCredentialsError } from '../../../domain/errors/invalid-credentials-error'
 import { UnexpectedError } from '../../../domain/errors/unexpected-error'
+import { AccountModel } from '../../../domain/models/account-model'
 
 export class RemoteAuthentication {
   constructor (
     private readonly url: string,
-    private readonly httpPostClient: HttpPostClient) {}
+    private readonly httpPostClient: HttpPostClient<AuthenticationParamns, AccountModel >) {}
 
-  private validateStatusCode (response: HttpResponse): void {
+  private validateStatusCode (response: HttpResponse<AccountModel>): void {
     switch (response.statusCode) {
       case HttpStatusCode.ok: break
       case HttpStatusCode.unathorized: throw new InvalidCredentialsError()
