@@ -11,7 +11,7 @@ export class RemoteAuthentication implements Authentication {
   private validateStatusCode (response: HttpResponse<AccountModel>): void {
     switch (response.statusCode) {
       case HttpStatusCode.ok: break
-      case HttpStatusCode.unathorized: throw new InvalidCredentialsError()
+      case HttpStatusCode.unauthorized: throw new InvalidCredentialsError()
       case HttpStatusCode.badRequest: throw new UnexpectedError()
       default: throw new UnexpectedError()
     }
