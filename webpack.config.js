@@ -1,5 +1,5 @@
 const path = require('path')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -14,7 +14,7 @@ module.exports = {
     alias: {
       '@': path.join(__dirname, 'src')
     }
-  }, 
+  },
   devServer: {
     contentBase: './public',
     writeToDisk: true,
@@ -22,7 +22,7 @@ module.exports = {
   },
   externals: {
     react: 'React',
-    'react-dom': "ReactDOM"
+    'react-dom': 'ReactDOM'
   },
   plugins: [
     new CleanWebpackPlugin()
