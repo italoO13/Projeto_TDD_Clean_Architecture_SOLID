@@ -1,24 +1,35 @@
 import React from 'react'
-import { getByTestId, render } from '@testing-library/react'
+import { getByTestId, render, RenderResult } from '@testing-library/react'
 import Login from './login'
+
+type SutTypes = {
+  sut: RenderResult
+}
+
+const makeSut = (): SutTypes => {
+  const sut = render(<Login />)
+  return {
+    sut
+  }
+}
 
 describe('Componente Login', () => {
   test('Verifica se inicialmente a mensagem de error e o spinner não são renderizados na tela', () => {
-    const { getByTestId } = render(<Login />)
-    const errorWrap = getByTestId('error-wrap')
+    const { sut } = makeSut()
+    const errorWrap = sut.getByTestId('error-wrap')
     expect(errorWrap.childElementCount).toBe(0)
   })
   test('Verifica se botão de submit inicialmente está desabilitado', () => {
-    const { getByTestId } = render(<Login />)
-    const submitButton = getByTestId('submit') as HTMLButtonElement
+    const { sut } = makeSut()
+    const submitButton = sut.getByTestId('submit') as HTMLButtonElement
     expect(submitButton.disabled).toBe(true)
   })
   test('Verifica se o fomulário', () => {
-    const { getByTestId } = render(<Login />)
-    const emailStatus = getByTestId('email-status')
+    const { sut } = makeSut()
+    const emailStatus = sut.getByTestId('email-status')
     expect(emailStatus.title).toBe('Campo obrigatório')
     expect(emailStatus.textContent).toBe('🔴')
-    const passwordStatus = getByTestId('password-status')
+    const passwordStatus = sut.getByTestId('password-status')
     expect(passwordStatus.title).toBe('Campo obrigatório')
     expect(passwordStatus.textContent).toBe('🔴')
   })
