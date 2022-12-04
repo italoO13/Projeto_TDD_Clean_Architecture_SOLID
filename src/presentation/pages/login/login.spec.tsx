@@ -12,10 +12,12 @@ type SutTypes = {
 
 class ValidationSpy implements Validation {
   errorMessage: string
-  input: object
+  fieldName: string
+  fieldValue: string
 
-  validate (input: object): string {
-    this.input = input
+  validate (fieldName: string, fieldValue: string): string {
+    this.fieldName = fieldName
+    this.fieldValue = fieldValue
     return this.errorMessage
   }
 }
@@ -59,9 +61,8 @@ describe('Componente Login', () => {
     const emailInput = sut.getByTestId('email')
     const emailMock = faker.internet.email()
     await userEvent.type(emailInput, emailMock)
-    expect(validationSpy.input).toEqual({
-      email: emailMock
-    })
+    expect(validationSpy.fieldName).toBe('email')
+    expect(validationSpy.fieldValue).toBe(emailMock)
   })
 
   test('Verifica se validação é chamada com os valores de passdword correto', async () => {
@@ -69,8 +70,7 @@ describe('Componente Login', () => {
     const passwordInpunt = sut.getByTestId('password')
     const passwordMock = faker.internet.password()
     await userEvent.type(passwordInpunt, passwordMock)
-    expect(validationSpy.input).toEqual({
-      password: passwordMock
-    })
+    expect(validationSpy.fieldName).toBe('password')
+    expect(validationSpy.fieldValue).toBe(passwordMock)
   })
 })
