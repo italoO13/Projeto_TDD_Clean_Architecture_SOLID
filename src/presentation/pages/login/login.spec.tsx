@@ -54,13 +54,23 @@ describe('Componente Login', () => {
     expect(passwordStatus.textContent).toBe('🔴')
   })
 
-  test('Verifica se validação é chamada com os valores corretos', async () => {
+  test('Verifica se validação é chamada com os valores de email correto', async () => {
     const { sut, validationSpy } = makeSut()
     const emailInput = sut.getByTestId('email')
     const emailMock = faker.internet.email()
     await userEvent.type(emailInput, emailMock)
     expect(validationSpy.input).toEqual({
       email: emailMock
+    })
+  })
+
+  test('Verifica se validação é chamada com os valores de passdword correto', async () => {
+    const { sut, validationSpy } = makeSut()
+    const passwordInpunt = sut.getByTestId('password')
+    const passwordMock = faker.internet.password()
+    await userEvent.type(passwordInpunt, passwordMock)
+    expect(validationSpy.input).toEqual({
+      password: passwordMock
     })
   })
 })
